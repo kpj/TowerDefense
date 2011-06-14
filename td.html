@@ -30,14 +30,14 @@ Map.prototype.at = function(x, y) {
 }
 var map = new Map(10,10,[
 "oooooooooo",
-" o        ",
-" oo    o  ",
-" o o  o   ",
-" o   o    ",
-" o  o     ",
-"    o     ",
-" o  o     ",
-" o  o     ",
+"s    oo  e",
+"oooo oo oo",
+"oooo oo oo",
+"o    oo oo",
+"o ooooo oo",
+"o     o oo",
+"ooooo o oo",
+"ooooo   oo",
 "oooooooooo"])
 var scale = foo.height/map.height
 // Variable Variablen
@@ -47,6 +47,8 @@ var score = 400
 
 var colorTable = {
 	"o" : "green",
+	"s" : "violet",
+	"e" : "red",
 	" " : "brown"
 }
 var towerType = {
@@ -56,8 +58,8 @@ var towerType = {
 }
 
 function showMap() {
-	for(i=0;i<map.width;i++) {
-		for(k=0;k<map.width;k++) {
+	for(var i=0;i<map.width;i++) {
+		for(var k=0;k<map.width;k++) {
 			ctx.fillStyle = colorTable[map.at(i,k)]
 			ctx.fillRect(i*scale,k*scale,scale,scale)
 		}
@@ -85,56 +87,56 @@ function checkPath() {
 			if (map.at(Math.floor(mob[p].x),Math.floor(mob[p].y+1)) == " ") {
 				mob[p].vy = mob[p].vx
 				mob[p].vx = 0
-				write(1)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				//write(1)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 			if (map.at(Math.floor(mob[p].x),Math.floor(mob[p].y-1)) == " ") {
-				mob[p].vx = - mob[p].vy
-				mob[p].vy = 0
-				write(2)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				mob[p].vy = - mob[p].vx
+				mob[p].vx = 0
+				//write(2)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 		}
 		if (map.at(Math.floor(mob[p].x-1),Math.floor(mob[p].y)) == "o" && mob[p].vx < 0) {
 			if (map.at(Math.floor(mob[p].x),Math.floor(mob[p].y+1)) == " ") {
 				mob[p].vy = - mob[p].vx
 				mob[p].vx = 0
-				write(3)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				//write(3)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 			if (map.at(Math.floor(mob[p].x),Math.floor(mob[p].y-1)) == " ") {
 				mob[p].vy = mob[p].vx
 				mob[p].vx = 0
-				write(4)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				//write(4)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 		}
 		if (map.at(Math.floor(mob[p].x),Math.floor(mob[p].y-1)) == "o" && mob[p].vy < 0) {
 			if (map.at(Math.floor(mob[p].x-1),Math.floor(mob[p].y)) == " ") {
 				mob[p].vx = - mob[p].vy
 				mob[p].vy = 0
-				write(5)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				//write(5)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 			if (map.at(Math.floor(mob[p].x+1),Math.floor(mob[p].y)) == " ") {
-				mob[p].vx = mob[p].vy
+				mob[p].vx = - mob[p].vy
 				mob[p].vy = 0
-				write(6)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				//write(6+" -- "+p)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 		}
 		if (map.at(Math.floor(mob[p].x),Math.floor(mob[p].y+1)) == "o" && mob[p].vy > 0) {
 			if (map.at(Math.floor(mob[p].x-1),Math.floor(mob[p].y)) == " " && Math.floor(mob[p].x-1) >= 0 ) {
 				mob[p].vx = - mob[p].vy
 				mob[p].vy = 0
-				write(7)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				//write(7)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 			if (map.at(Math.floor(mob[p].x+1),Math.floor(mob[p].y)) == " ") {
-				mob[p].vy = mob[p].vx
-				mob[p].vx = 0
-				write(8)
-				write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
+				mob[p].vx = mob[p].vy
+				mob[p].vy = 0
+				//write(8)
+				//write(" x: "+mob[p].vx+" y: "+mob[p].vy+" (X: "+Math.floor(mob[p].x)+" Y:"+Math.floor(mob[p].y)+" )")
 			}
 		}
 	}
@@ -319,16 +321,16 @@ tower[p].lastShot = t
 }}}}
 
 function checkLife() {
-for (var p=mob.length-1; p>=0; p--) {
-if (mob[p].x >= map.width) {
-life--
-mob.splice(p,1)
-updateStatus()
-}
-}
-if (life <= 0) {
-clearInterval(inter)
-}
+	for (var p=mob.length-1; p>=0; p--) {
+		if (mob[p].x > map.width) {
+			life--
+			mob.splice(p,1)
+			updateStatus()
+		}
+	}
+	if (life <= 0) {
+		clearInterval(inter)
+	}
 }
 
 function write(text) {
@@ -347,32 +349,44 @@ updateStatus()
 }
 
 function autoWave() {
-if (nextWave > new Date().getTime()) {
-return
-}
-var maxStrength = Math.pow(wave+2, 2)*10
-if (maxStrength >= spawnStrength) {
-var health = Math.random()*maxStrength
-var speed = 0.3+Math.random()*0.8
-mob.push({
-x: 0.5,
-y: 1.5+Math.random()*3,
-vx: speed,
-vy: 0,
-health: health,
-sHealth: health
-})
-var strength = speed*health
-spawnStrength += strength
-nextWave = new Date().getTime()+300
-} else {
-if (!mob.length) {
-wave++
-updateStatus()
-spawnStrength = 0
-nextWave = new Date().getTime()+3000
-}
-}
+	var setX = 0
+	var setY = 0
+	if (nextWave > new Date().getTime()) {
+		return
+	}
+	var maxStrength = Math.pow(wave+2, 2)*10
+	if (maxStrength >= spawnStrength) {
+		var health = Math.random()*maxStrength
+		var speed = 0.3+Math.random()*0.8
+		for(var i=0;i<map.width;i++) {
+			for(var k=0;k<map.width;k++) {
+				if (map.at(i, k) == "s") {
+					write(i+" "+k);
+					setX = i + 0.5
+					setY = k + 0.5
+				}
+			}
+		}
+		mob.push({
+			x: setX,
+			y: setY,
+			vx: speed,
+			vy: 0,
+			health: health,
+			sHealth: health
+		})
+		var strength = speed*health
+		spawnStrength += strength
+		nextWave = new Date().getTime()+300
+	} 
+	else {
+		if (!mob.length) {
+			wave++
+			updateStatus()
+			spawnStrength = 0
+			nextWave = new Date().getTime()+3000
+		}
+	}
 }
 var spawnStrength = 0
 var nextWave = new Date().getTime()+3000
@@ -468,17 +482,20 @@ tower.push({
 }
 
 function tick() {
-showMap()
-showMob()
-showTower()
-showShot()
-moveStuff()
-checkRange()
-checkDeath()
-checkLife()
-checkPath()
-autoWave()
-drawSelectedPlace()
+	showMap()
+	showMob()
+	showTower()
+	showShot()
+	moveStuff()
+	checkRange()
+	checkDeath()
+	checkLife()
+	checkPath()
+	autoWave()
+	drawSelectedPlace()
+	if (map.at(Math.floor(mob[0].x/scale), Math.floor(mob[0].y/scale)) == " ") {
+		write(map.at(Math.floor(mob[0].x/scale), Math.floor(mob[0].y/scale)))	
+	} 
 }
 var inter = setInterval(tick, 100)
 write("end")
