@@ -372,14 +372,15 @@ function autoWave() {
 var spawnStrength = 0
 var nextWave = new Date().getTime()+3000
 
-canvas.onclick = selectPlace
-
 var selectedX = undefined
 var selectedY = undefined
-function selectPlace(e) {
-	selectedX = Math.floor(e.offsetX/scale)+0.5
-	selectedY = Math.floor(e.offsetY/scale)+0.5
-}
+$('#foo').click(function (e) {
+	var topleft = $(this).offset()
+	var offsetX = e.pageX - topleft.left
+	var offsetY = e.pageY - topleft.top
+	selectedX = Math.floor(offsetX/scale)+0.5
+	selectedY = Math.floor(offsetY/scale)+0.5
+})
 
 function drawSelectedPlace() {
 	if (map.at(selectedX-0.5,selectedY-0.5) == " ") {
