@@ -246,45 +246,45 @@ function shoot(tower,mob) {
 	var dL = Math.sqrt(Math.pow(dX,2)+Math.pow(dY,2))
 	if (tower.type == 0) {
 		shot.push({
-		"x" : tower.x,
-		"sX" : tower.x,
-		"dX" : dX,
-		"y" : tower.y,
-		"sY" : tower.y,
-		"dY" : dY,
-		"vx": dX / dL * tower.v,
-		"vy": dY / dL * tower.v,
-		"r" : tower.exR,
-		"damage" : tower.damage,
-		"type" : tower.type
+			"x" : tower.x,
+			"sX" : tower.x,
+			"dX" : dX,
+			"y" : tower.y,
+			"sY" : tower.y,
+			"dY" : dY,
+			"vx": dX / dL * tower.v,
+			"vy": dY / dL * tower.v,
+			"r" : tower.exR,
+			"damage" : tower.damage,
+			"type" : tower.type
 		})
 	} else if (tower.type == 1) {
 		shot.push({
-		"x" : tower.x,
-		"sX" : tower.x,
-		"dX" : dX,
-		"y" : tower.y,
-		"sY" : tower.y,
-		"dY" : dY,
-		"vx": dX / dL * tower.v,
-		"vy": dY / dL * tower.v,
-		"r" : tower.exR,
-		"damage" : tower.damage,
-		"type" : tower.type
+			"x" : tower.x,
+			"sX" : tower.x,
+			"dX" : dX,
+			"y" : tower.y,
+			"sY" : tower.y,
+			"dY" : dY,
+			"vx": dX / dL * tower.v,
+			"vy": dY / dL * tower.v,
+			"r" : tower.exR,
+			"damage" : tower.damage,
+			"type" : tower.type
 		})
 	} else if (tower.type == 2) {
 		shot.push({
-		"x" : tower.x,
-		"sX" : tower.x,
-		"dX" : dX,
-		"y" : tower.y,
-		"sY" : tower.y,
-		"dY" : dY,
-		"vx": 0,
-		"vy": 0,
-		"r" : tower.exR,
-		"damage" : tower.damage,
-		"type" : tower.type
+			"x" : tower.x,
+			"sX" : tower.x,
+			"dX" : dX,
+			"y" : tower.y,
+			"sY" : tower.y,
+			"dY" : dY,
+			"vx": 0,
+			"vy": 0,
+			"r" : tower.exR,
+			"damage" : tower.damage,
+			"type" : tower.type
 		})
 	}
 }
@@ -446,16 +446,16 @@ function placeTower(x, y, type) {
 		score -= 200
 		updateStatus()
 		tower.push({
-		"x" : x,
-		"y" : y,
-		"v" : 8.5,
-		"r" : 3,
-		"exR" : 0.4,
-		"delay" : 800,
-		"lastShot" : 0,
-		"damage" : 40,
-		"lvl" : 1,
-		"type" : type
+			"x" : x,
+			"y" : y,
+			"v" : 8.5,
+			"r" : 3,
+			"exR" : 0.4,
+			"delay" : 800,
+			"lastShot" : 0,
+			"damage" : 40,
+			"lvl" : 1,
+			"type" : type
 		})
 	}
 }
