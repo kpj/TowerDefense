@@ -159,7 +159,9 @@ function moveStuff() {
 function checkDeath() {
 	for(var p=mob.length-1; p>=0; p--) {
 		if (mob[p].health <= 0) {
-			setScore(mob[p].vx*mob[p].sHealth)
+			var mobSpeed = Math.sqrt(
+					Math.pow(mob[p].vx, 2) + Math.pow(mob[p].vy, 2))
+			setScore(mobSpeed*mob[p].sHealth)
 			mob.splice(p, 1)
 		}
 	}
