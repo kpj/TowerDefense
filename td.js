@@ -385,7 +385,7 @@ $('#foo').click(function (e) {
 })
 
 function drawSelectedPlace() {
-	if (map.at(selectedX-0.5,selectedY-0.5) == " ") {
+	if (map.at(selectedX-0.5,selectedY-0.5) == " " || map.at(selectedX-0.5,selectedY-0.5) == "s" || map.at(selectedX-0.5,selectedY-0.5) == "e") {
 		selectedX = undefined
 		selectedY = undefined
 	}
