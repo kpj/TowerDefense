@@ -21,7 +21,7 @@ var map = new Map(10,10,[
 	"ooooo   oo",
 	"oooooooooo"]
 )
-var scale = foo.height/map.height
+var scale = canvas.height/map.height
 // Variable Variablen
 var wave = 1
 var life = 10
