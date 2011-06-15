@@ -56,7 +56,7 @@ function showTower() {
 	ctx.fillStyle = "white"
 	for(p in tower) {
 		ctx.beginPath()
-		ctx.arc(tower[p].x*scale,tower[p].y*scale,scale/3,0,7)
+		ctx.arc(tower[p].x*scale,tower[p].y*scale,scale/3,0,7, false)
 		ctx.fill()
 		ctx.closePath()
 	}
@@ -187,10 +187,10 @@ function showShot() {
 			ctx.strokeStyle = "orange"
 			ctx.beginPath()
 			if (!shot[p].explodes) {
-				ctx.arc(shot[p].x*scale,shot[p].y*scale,scale/7,0,7)
+				ctx.arc(shot[p].x*scale,shot[p].y*scale,scale/7,0,7, false)
 				ctx.fill()
 			} else {
-				ctx.arc(shot[p].x*scale,shot[p].y*scale,shot[p].r*scale,0,7)
+				ctx.arc(shot[p].x*scale,shot[p].y*scale,shot[p].r*scale,0,7, false)
 				ctx.stroke()
 			}
 			ctx.closePath()
@@ -219,12 +219,12 @@ function showMob() {
 	ctx.lineWidth = 2
 	for (p in mob) {
 		ctx.beginPath()
-		ctx.arc(mob[p].x*scale,mob[p].y*scale,scale/3,0,7)
+		ctx.arc(mob[p].x*scale,mob[p].y*scale,scale/3,0,7, false)
 		ctx.fill()
 		ctx.closePath()
 		ctx.beginPath()
 		ctx.arc(mob[p].x*scale, mob[p].y*scale, scale/3,
-				0, Math.PI*2/mob[p].sHealth*mob[p].health)
+				0, Math.PI*2/mob[p].sHealth*mob[p].health, false)
 		ctx.stroke()
 		ctx.closePath()
 	}
@@ -397,7 +397,7 @@ function drawSelectedPlace() {
 			ctx.strokeStyle="black"
 			ctx.lineWidth=3
 			ctx.beginPath()
-			ctx.arc(selectedX*scale,selectedY*scale,tower[p].r*scale,0,7)
+			ctx.arc(selectedX*scale,selectedY*scale,tower[p].r*scale,0,7, false)
 			ctx.stroke()
 			ctx.closePath()
 			showTowerInfo(tower[p])
