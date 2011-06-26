@@ -36,7 +36,8 @@ var colorTable = {
 var towerType = {
 	"0" : "Grenade",
 	"1" : "Laser",
-	"2" : "Arrow"
+	"2" : "Arrow",
+    "3" : "Rocket"
 }
 
 function showMap() {
@@ -60,6 +61,14 @@ function showTower() {
 		ctx.fill()
 		ctx.closePath()
 	}
+}
+
+function makeLine(sX, sY, zX, zY) {
+    ctx.beginPath()
+    ctx.moveTo(sX,sY)
+    ctx.lineTo(zX,zY)
+    ctx.stroke()
+    ctx.closePath()
 }
 
 function checkPath() {
@@ -195,13 +204,9 @@ function showShot() {
 			}
 			ctx.closePath()
 		} else if (shot[p].type == 1) {
-			ctx.strokeStyle="blue"
-			ctx.lineWith=4
-			ctx.beginPath()
-			ctx.moveTo(shot[p].sX*scale,shot[p].sY*scale)
-			ctx.lineTo(shot[p].x*scale,shot[p].y*scale)
-			ctx.stroke()
-			ctx.closePath()
+            ctx.strokeStyle="blue"
+            ctx.lineWith=4
+            makeLine(shot[p].sX*scale, shot[p].sY*scale, shot[p].x*scale, shot[p].y*scale)
 		} else if (shot[p].type == 2) {
 			shot[p].x += shot[p].dX
 			shot[p].y += shot[p].dY
@@ -209,6 +214,13 @@ function showShot() {
 			ctx.strokeRect((shot[p].x-0.25)*scale,( shot[p].y-0.25)*scale, 20, 20)
 			explode(shot[p])
 			shot.splice(p, 1)
+		} 
+        else if (shot[p].type == 3) {
+			ctx.strokeStyle="black"
+            ctx.lineWith=7
+            var vLen = Math.sqrt(Math.pow(shot[p].vx,2)+Math.pow(shot[p].vy,2))
+			//makeLine(shot[p].x, shot[p].y, -shot[p].x-vLen, -shot[p].x-vLen)
+            write(42)
 		}
 	}
 }
@@ -288,6 +300,20 @@ function shoot(tower,mob) {
 			"damage" : tower.damage,
 			"type" : tower.type
 		})
+	} else if (tower.type == 3) {
+		shot.push({
+			"x" : tower.x,
+			"sX" : tower.x,
+			"dX" : dX,
+			"y" : tower.y,
+			"sY" : tower.y,
+			"dY" : dY,
+			"vx": dX / dL * tower.v,
+			"vy": dX / dL * tower.v,
+			"r" : tower.exR,
+			"damage" : tower.damage,
+			"type" : tower.type
+		})
 	}
 }
 
@@ -345,7 +371,7 @@ function autoWave() {
 		for(var i=0;i<map.width;i++) {
 			for(var k=0;k<map.width;k++) {
 				if (map.at(i, k) == "s") {
-					write(i+" "+k);
+					//write(i+" "+k);
 					setX = i + 0.5
 					setY = k + 0.5
 				}
@@ -418,6 +444,9 @@ function showTowerInfo(tower) {
 	else if (tower.type == 2) {
 		cost = 10 * tower.lvl
 	}
+    else if (tower.type == 3) {
+		cost = 60 * tower.lvl
+	}
 	document.getElementById("stat").innerHTML="Type: "+towerType[tower.type]+" - Level: "+tower.lvl+" - Damage: "+tower.damage+" - Costs: "+cost
 }
 
@@ -435,6 +464,9 @@ function placeTower(x, y, type) {
 			} else if (tower[p].type == 2) {
 				uCost = 10 * tower[p].lvl
 				damageIncer = tower[p].lvl*10
+			} else if (tower[p].type == 3) {
+				uCost = 60 * tower[p].lvl
+				damageIncer = tower[p].lvl*60
 			}
 			if (score >= uCost) {
 				tower[p].damage += damageIncer
@@ -475,9 +507,9 @@ function tick() {
 	checkPath()
 	autoWave()
 	drawSelectedPlace()
-	if (map.at(Math.floor(mob[0].x/scale), Math.floor(mob[0].y/scale)) == " ") {
+	/*if (map.at(Math.floor(mob[0].x/scale), Math.floor(mob[0].y/scale)) == " ") {
 		write(map.at(Math.floor(mob[0].x/scale), Math.floor(mob[0].y/scale)))	
-	} 
+	} */
 }
 var inter = setInterval(tick, 100)
 write("end")
