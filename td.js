@@ -411,10 +411,12 @@ $('#foo').click(function (e) {
 })
 
 function drawSelectedPlace() {
-	if (map.at(selectedX-0.5,selectedY-0.5) == " " || map.at(selectedX-0.5,selectedY-0.5) == "s" || map.at(selectedX-0.5,selectedY-0.5) == "e") {
-		selectedX = undefined
-		selectedY = undefined
-	}
+    if (selectedX != undefined) {
+        if (map.at(selectedX-0.5,selectedY-0.5) == " " || map.at(selectedX-0.5,selectedY-0.5) == "s" || map.at(selectedX-0.5,selectedY-0.5) == "e") {
+            selectedX = undefined
+            selectedY = undefined
+        }
+    }
 	ctx.strokeStyle = "white"
 	ctx.lineWidth = 2
 	ctx.strokeRect((selectedX-0.5)*scale,(selectedY-0.5)*scale,scale,scale)
